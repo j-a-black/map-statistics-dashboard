@@ -1,9 +1,18 @@
 import React from "react";
 
+import { Button, Grid, Message, Header, Ref } from "semantic-ui-react";
+import Jumbotron from "./components/jumbotron/jumbotron.component";
+
 const App = () => {
   return (
     <div>
-      <h1>This is the App Component</h1>
+      <Grid container style={{ padding: "2rem" }}>
+        <Grid.Row>
+          <Grid.Column>
+            <Jumbotron />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     </div>
   );
 };
