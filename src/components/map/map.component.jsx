@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet";
 
 import axios from "axios";
 
-const Map = ({ countriesData, globalData }) => {
+const Map = ({ countriesData }) => {
   const position = [51.505, -0.09];
   // const [countriesData, setCountriesData] = useState([]);
   // const [globalData, setGlobalData] = useState([]);

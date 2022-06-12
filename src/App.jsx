@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import { Button, Grid, Message, Header, Ref } from "semantic-ui-react";
+import {
+  Button,
+  Grid,
+  Message,
+  Header,
+  Ref,
+  Table,
+  Menu,
+  Segment,
+} from "semantic-ui-react";
 
 import Jumbotron from "./components/jumbotron/jumbotron.component";
 import Map from "./components/map/map.component";
+import CountriesList from "./components/countries-list/countries-list.component";
 
 const App = () => {
   const [countriesData, setCountriesData] = useState([]);
@@ -29,8 +39,8 @@ const App = () => {
     getData();
   }, []);
 
-  console.log(countriesData);
-  console.log(globalData);
+  // console.log(countriesData);
+  // console.log(globalData);
 
   return (
     <div>
@@ -43,12 +53,19 @@ const App = () => {
 
         <Grid.Row>
           <Grid.Column>
-            <Map countriesData={countriesData} globalData={globalData} />
+            <Map countriesData={countriesData} />
           </Grid.Column>
         </Grid.Row>
 
         <Grid.Row>
-          <Grid.Column>Hi</Grid.Column>
+          <Grid.Column>
+            <Segment>
+              <CountriesList
+                countriesData={countriesData}
+                globalData={globalData.cases}
+              />
+            </Segment>
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     </div>
