@@ -2,45 +2,52 @@ import React, { useState, useEffect } from "react";
 
 import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet";
 
-import { instance } from "../../data/data";
+import axios from "axios";
+// import { instance } from "../../data/data";
 
 const Map = () => {
   const position = [51.505, -0.09];
-  const [data, setData] = useState([]);
+  const [countriesData, setCountriesData] = useState([]);
+  const [globalData, setGlobalData] = useState([]);
+
+  const countries = axios.get("https://disease.sh/v3/covid-19/countries");
+  const all = axios.get("https://disease.sh/v3/covid-19/all");
 
   useEffect(() => {
     const getData = async () => {
-      let response;
-      try {
-        response = await instance.get("/countries");
-      } catch (e) {
-        console.log("Unable to retreive data");
-        return;
-      }
-      setData(response.data);
+      await axios
+        .all([countries, all])
+        .then(
+          axios.spread((...responses) => {
+            setCountriesData(responses[0].data);
+            setGlobalData(responses[1].data);
+          })
+        )
+        .catch((err) => console.error(err));
     };
 
     getData();
   }, []);
 
-  const renderData = data.map(({ country, countryInfo, cases }) => {
-    const lat = countryInfo.lat;
-    const long = countryInfo.long;
+  console.log(countriesData);
+  console.log(globalData);
 
-    return (
-      <Marker key={country} position={[lat, long]}>
-        <Popup>{country}</Popup>
-      </Marker>
-    );
-  });
+  const renderAllCountriesNumOfCases = countriesData.map(
+    ({ country, countryInfo, cases }) => {
+      const lat = countryInfo.lat;
+      const long = countryInfo.long;
+      const casesWithCommas = cases.toLocaleString("en-US");
 
-  console.log(renderData);
-
-  // const renderMarkers = data.map((country, index) => (
-  //   <Marker key={index} position={position}>
-  //     <Popup>Your Location</Popup>
-  //   </Marker>
-  // ));
+      return (
+        <Marker key={country} position={[lat, long]}>
+          <Popup>
+            {country} <br />
+            {` Reported Cases: ${casesWithCommas}`}
+          </Popup>
+        </Marker>
+      );
+    }
+  );
 
   return (
     <>
@@ -54,7 +61,7 @@ const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {renderData}
+        {renderAllCountriesNumOfCases}
       </MapContainer>
     </>
   );
