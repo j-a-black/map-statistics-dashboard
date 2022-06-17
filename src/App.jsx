@@ -62,7 +62,8 @@ const App = () => {
             <Segment>
               <CountriesList
                 countriesData={countriesData}
-                globalData={globalData.cases}
+                globalCases={globalData.cases}
+                globalDeaths={globalData.deaths}
               />
             </Segment>
           </Grid.Column>

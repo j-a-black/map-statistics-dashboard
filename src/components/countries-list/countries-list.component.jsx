@@ -4,7 +4,7 @@ import { addCommaToValue } from "../../utils";
 
 import { Header, Segment, Table } from "semantic-ui-react";
 
-const CountriesList = ({ globalData, countriesData }) => {
+const CountriesList = ({ globalCases, globalDeaths, countriesData }) => {
   //   const addCommaToValue = (value) => {
   //     if (value) {
   //       let valueWithComma = value.toLocaleString("en-US");
@@ -27,7 +27,13 @@ const CountriesList = ({ globalData, countriesData }) => {
   return (
     <>
       <Header as="h2" size="huge" attached="top" inverted color="red" block>
-        {`Global Cases: ${addCommaToValue(globalData)}`}
+        <Header as="h3">{`Global Cases: ${addCommaToValue(
+          globalCases
+        )}`}</Header>
+        <Header as="h3">
+          {" "}
+          {`Global Deaths: ${addCommaToValue(globalDeaths)}`}
+        </Header>
       </Header>
       <Segment style={{ height: "40rem", overflowY: "scroll" }}>
         <Table attached>
