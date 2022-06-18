@@ -2,7 +2,7 @@ import React from "react";
 
 import { addCommaToValue } from "../../utils";
 
-import { Header, Segment, Table } from "semantic-ui-react";
+import { Container, Header, Segment, Table } from "semantic-ui-react";
 
 const CountriesList = ({ globalCases, globalDeaths, countriesData }) => {
   //   const addCommaToValue = (value) => {
@@ -40,7 +40,9 @@ const CountriesList = ({ globalCases, globalDeaths, countriesData }) => {
           {`Global Deaths: ${addCommaToValue(globalDeaths)}`}
         </Header>
       </Header>
-      <Segment style={{ height: "40rem", overflowY: "scroll" }}>
+      <Container
+        style={{ height: "40rem", overflowY: "scroll", paddingTop: "2rem" }}
+      >
         <Table attached>
           <Table.Header>
             <Table.HeaderCell>Country</Table.HeaderCell>
@@ -48,7 +50,7 @@ const CountriesList = ({ globalCases, globalDeaths, countriesData }) => {
           </Table.Header>
           <Table.Body>{renderCountriesList}</Table.Body>
         </Table>
-      </Segment>
+      </Container>
     </>
   );
 };
