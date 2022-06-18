@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container } from "semantic-ui-react";
+import { Container, Header } from "semantic-ui-react";
 import { Bar, Line, Chart } from "react-chartjs-2";
 
 // import {
@@ -37,6 +37,8 @@ import {
   CategoryScale,
   LinearScale,
   Legend,
+  Tooltip,
+  Title,
 } from "chart.js";
 
 ChartJS.register(
@@ -46,26 +48,29 @@ ChartJS.register(
   LineElement,
   CategoryScale,
   LinearScale,
-  Legend
+  Legend,
+  Tooltip,
+  Title
 );
 
 const ChartsList = ({ globalHistoricalData }) => {
   const { cases, deaths } = globalHistoricalData;
 
-  // const labels = ["January", "February", "March", "April", "May", "June"];
   const labels = [];
 
   const casesData = {
     labels: labels,
     datasets: [
       {
-        label: "30 Days: Global Cases",
+        label: "Global Cases",
         data: cases,
         backgroundColor: ["rgb(255, 165, 0)"],
         borderColor: ["rgb(255, 165, 0)"],
         borderWidth: 1,
-        fill: true,
-        // yAxisID: "y-axis-1",
+        pointBorderColor: "rgba(0, 0, 0, 0)",
+        pointBackgroundColor: "rgba(0, 0, 0, 0)",
+        pointHoverBackgroundColor: "rgb(255, 165, 0)",
+        pointHoverBorderColor: "rgb(255, 165, 0)",
       },
     ],
   };
@@ -73,33 +78,24 @@ const ChartsList = ({ globalHistoricalData }) => {
     labels: labels,
     datasets: [
       {
-        label: "30 Days: Global Deaths",
+        label: "Global Deaths",
         data: deaths,
         backgroundColor: ["rgb(255, 0, 0)"],
         borderColor: ["rgb(255, 0, 0)"],
         borderWidth: 1,
-        fill: false,
-        // yAxisID: "y-axis-2",
+        pointBorderColor: "rgba(0, 0, 0, 0)",
+        pointBackgroundColor: "rgba(0, 0, 0, 0)",
+        pointHoverBackgroundColor: "rgb(255, 0, 0)",
+        pointHoverBorderColor: "rgb(255, 0, 0)",
       },
     ],
   };
 
-  //   const data = {
-  //     labels: labels,
-  //     datasets: [
-  //       {
-  //         label: "My First Dataset",
-  //         // data: [65, 59, 80, 81, 56, 55, 40],
-  //         data: cases,
-  //         backgroundColor: ["rgba(255, 99, 132, 0.2)"],
-  //         borderColor: ["rgb(255, 99, 132)"],
-  //         borderWidth: 1,
-  //       },
-  //     ],
-  //   };
-
   return (
     <Container>
+      <Header as="h2" textAlign="center">
+        30-day Snapshot
+      </Header>
       <Container>
         <Line data={casesData} />
       </Container>

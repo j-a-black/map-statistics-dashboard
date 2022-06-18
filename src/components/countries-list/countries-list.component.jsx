@@ -41,7 +41,7 @@ const CountriesList = ({ globalCases, globalDeaths, countriesData }) => {
         </Header>
       </Header>
       <Container
-        style={{ height: "40rem", overflowY: "scroll", paddingTop: "2rem" }}
+        style={{ height: "45rem", overflowY: "scroll", paddingTop: "2rem" }}
       >
         <Table attached>
           <Table.Header>
