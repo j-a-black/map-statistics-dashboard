@@ -68,7 +68,7 @@ const App = () => {
 
             <Grid.Column>
               <Segment>
-                <ChartsList />
+                <ChartsList globalHistoricalData={globalHistoricalData} />
               </Segment>
             </Grid.Column>
           </Grid.Row>
