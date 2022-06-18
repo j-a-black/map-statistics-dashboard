@@ -13,16 +13,21 @@ const CountriesList = ({ globalCases, globalDeaths, countriesData }) => {
   //     return;
   //   };
 
-  const renderCountriesList = countriesData.map(({ country, cases }) => {
-    const casesWithCommas = addCommaToValue(cases);
+  const renderCountriesList = countriesData.map(
+    ({ country, cases, deaths }) => {
+      const countryCases = addCommaToValue(cases);
+      const countryDeaths = addCommaToValue(deaths);
 
-    return (
-      <Table.Row key={country}>
-        <Table.Cell>{country}</Table.Cell>
-        <Table.Cell>{casesWithCommas}</Table.Cell>
-      </Table.Row>
-    );
-  });
+      return (
+        <Table.Row key={country}>
+          <Table.Cell>{country}</Table.Cell>
+          <Table.Cell>
+            {countryCases} / {countryDeaths}
+          </Table.Cell>
+        </Table.Row>
+      );
+    }
+  );
 
   return (
     <>
@@ -39,7 +44,7 @@ const CountriesList = ({ globalCases, globalDeaths, countriesData }) => {
         <Table attached>
           <Table.Header>
             <Table.HeaderCell>Country</Table.HeaderCell>
-            <Table.HeaderCell>Cases</Table.HeaderCell>
+            <Table.HeaderCell>Cases / Deaths</Table.HeaderCell>
           </Table.Header>
           <Table.Body>{renderCountriesList}</Table.Body>
         </Table>
