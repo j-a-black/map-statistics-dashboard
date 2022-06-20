@@ -12,12 +12,17 @@ const App = () => {
   const [countriesData, setCountriesData] = useState([]);
   const [globalData, setGlobalData] = useState([]);
   const [globalHistoricalData, setGlobalHistoricalData] = useState([]);
+  const [countryItemSelected, setCountryItemSelected] = useState("");
 
   const countries = axios.get("https://disease.sh/v3/covid-19/countries");
   const worldwide = axios.get("https://disease.sh/v3/covid-19/all");
   const globalHistory = axios.get(
     "https://disease.sh/v3/covid-19/historical/all"
   );
+
+  const handleCountryItemClicked = (event) => {
+    setCountryItemSelected(event.target.textContent);
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -62,6 +67,8 @@ const App = () => {
                   countriesData={countriesData}
                   globalCases={globalData.cases}
                   globalDeaths={globalData.deaths}
+                  handleCountryItemClicked={handleCountryItemClicked}
+                  countryItemSelected={countryItemSelected}
                 />
               </Segment>
             </Grid.Column>

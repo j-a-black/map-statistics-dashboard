@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { addCommaToValue } from "../../utils";
 
 import { Container, Header, Segment, Table } from "semantic-ui-react";
 
-const CountriesList = ({ globalCases, globalDeaths, countriesData }) => {
-  //   const addCommaToValue = (value) => {
-  //     if (value) {
-  //       let valueWithComma = value.toLocaleString("en-US");
-  //       return valueWithComma;
-  //     }
-  //     return;
-  //   };
+import "./countries-list.styles.scss";
 
+const CountriesList = ({
+  globalCases,
+  globalDeaths,
+  countriesData,
+  handleCountryItemClicked,
+  countryItemSelected,
+}) => {
   const renderCountriesList = countriesData.map(
     ({ country, cases, deaths }) => {
       const countryCases = addCommaToValue(cases);
@@ -20,7 +20,16 @@ const CountriesList = ({ globalCases, globalDeaths, countriesData }) => {
 
       return (
         <Table.Row key={country}>
-          <Table.Cell>{country}</Table.Cell>
+          <Table.Cell
+            className={
+              countryItemSelected === country ? "active-border-left" : ""
+            }
+            // onClick={handleClickOnCountryItem}
+            style={{ cursor: "pointer" }}
+            onClick={handleCountryItemClicked}
+          >
+            {country}
+          </Table.Cell>
           <Table.Cell>
             {countryCases} / {countryDeaths}
           </Table.Cell>
@@ -41,7 +50,7 @@ const CountriesList = ({ globalCases, globalDeaths, countriesData }) => {
         </Header>
       </Header>
       <Container
-        style={{ height: "45rem", overflowY: "scroll", paddingTop: "2rem" }}
+        style={{ height: "49rem", overflowY: "scroll", paddingTop: "2rem" }}
       >
         <Table attached>
           <Table.Header>

@@ -62,11 +62,11 @@ const ChartsList = ({ globalHistoricalData }) => {
     labels: labels,
     datasets: [
       {
-        label: "Global Cases",
+        label: "Cases",
         data: cases,
         backgroundColor: ["rgb(255, 165, 0)"],
         borderColor: ["rgb(255, 165, 0)"],
-        borderWidth: 1,
+        borderWidth: 1.5,
         pointBorderColor: "rgba(0, 0, 0, 0)",
         pointBackgroundColor: "rgba(0, 0, 0, 0)",
         pointHoverBackgroundColor: "rgb(255, 165, 0)",
@@ -78,11 +78,11 @@ const ChartsList = ({ globalHistoricalData }) => {
     labels: labels,
     datasets: [
       {
-        label: "Global Deaths",
+        label: "Deaths",
         data: deaths,
         backgroundColor: ["rgb(255, 0, 0)"],
         borderColor: ["rgb(255, 0, 0)"],
-        borderWidth: 1,
+        borderWidth: 1.5,
         pointBorderColor: "rgba(0, 0, 0, 0)",
         pointBackgroundColor: "rgba(0, 0, 0, 0)",
         pointHoverBackgroundColor: "rgb(255, 0, 0)",
@@ -94,7 +94,7 @@ const ChartsList = ({ globalHistoricalData }) => {
   return (
     <Container>
       <Header as="h2" textAlign="center">
-        30-day Snapshot
+        30-Day Global Snapshot
       </Header>
       <Container>
         <Line data={casesData} />
