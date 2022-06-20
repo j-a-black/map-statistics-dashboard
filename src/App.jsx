@@ -21,6 +21,10 @@ const App = () => {
   );
 
   const handleCountryItemClicked = (event) => {
+    if (countryItemSelected === event.target.textContent) {
+      setCountryItemSelected("");
+      return;
+    }
     setCountryItemSelected(event.target.textContent);
   };
 
