@@ -59,7 +59,10 @@ const App = () => {
 
         <Grid.Row>
           <Grid.Column>
-            <Map countriesData={countriesData} />
+            <Map
+              countriesData={countriesData}
+              countryItemSelected={countryItemSelected}
+            />
           </Grid.Column>
         </Grid.Row>
 
@@ -71,6 +74,7 @@ const App = () => {
                   countriesData={countriesData}
                   globalCases={globalData.cases}
                   globalDeaths={globalData.deaths}
+                  globalDataLastUpdated={globalData.updated}
                   handleCountryItemClicked={handleCountryItemClicked}
                   countryItemSelected={countryItemSelected}
                 />

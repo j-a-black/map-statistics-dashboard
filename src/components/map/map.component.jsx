@@ -1,68 +1,83 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet";
+import { addCommaToValue } from "../../utils";
 
-import axios from "axios";
+import {
+  MapContainer,
+  TileLayer,
+  Popup,
+  Marker,
+  Circle,
+  useMap,
+  useMapEvent,
+  useMapEvents,
+} from "react-leaflet";
 
-const Map = ({ countriesData }) => {
-  const position = [51.505, -0.09];
-  // const [countriesData, setCountriesData] = useState([]);
-  // const [globalData, setGlobalData] = useState([]);
+const Map = ({ countriesData, countryItemSelected }) => {
+  // const position = [51.505, -0.09];
 
-  // const countries = axios.get("https://disease.sh/v3/covid-19/countries");
-  // const all = axios.get("https://disease.sh/v3/covid-19/all");
+  const [position, setPosition] = useState([0, 0]);
+  const animateRef = useRef(true);
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     await axios
-  //       .all([countries, all])
-  //       .then(
-  //         axios.spread((...responses) => {
-  //           setCountriesData(responses[0].data);
-  //           setGlobalData(responses[1].data);
-  //         })
-  //       )
-  //       .catch((err) => console.error(err));
-  //   };
+  function SetViewOnClick({ animateRef }) {
+    const map = useMapEvent("click", (e) => {
+      map.setView(e.latlng, map.getZoom(), {
+        animate: animateRef.current || false,
+      });
+    });
 
-  //   getData();
-  // }, []);
+    return null;
+  }
 
-  // console.log(countriesData);
-  // console.log(globalData);
+  const MoveToMarker = () => {
+    const map = useMapEvent();
+  };
 
   const renderAllCountriesNumOfCases = countriesData.map(
     ({ country, countryInfo, cases }) => {
       const lat = countryInfo.lat;
       const long = countryInfo.long;
-      const casesWithCommas = cases.toLocaleString("en-US");
+      const countryCases = addCommaToValue(cases);
 
       return (
         <Marker key={country} position={[lat, long]}>
           <Popup>
             {country} <br />
-            {` Reported Cases: ${casesWithCommas}`}
+            {`Cases: ${countryCases}`}
           </Popup>
         </Marker>
       );
     }
   );
 
+  useEffect(() => {
+    if (countryItemSelected) {
+      for (let i = 0; i < countriesData.length; i++) {
+        if (countriesData[i].country === countryItemSelected) {
+          const lat = countriesData[i].countryInfo.lat;
+          const long = countriesData[i].countryInfo.long;
+          setPosition([lat, long]);
+        }
+      }
+    }
+  }, [countryItemSelected]);
+
+  // console.log(position);
+
   return (
-    <>
-      <MapContainer
-        center={position}
-        zoom={2}
-        touchZoom={true}
-        scrollWheelZoom={false}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {renderAllCountriesNumOfCases}
-      </MapContainer>
-    </>
+    <MapContainer
+      center={position}
+      zoom={2}
+      touchZoom={true}
+      scrollWheelZoom={false}
+      flyTo={countryItemSelected ? position : null}
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      {renderAllCountriesNumOfCases}
+    </MapContainer>
   );
 };
 

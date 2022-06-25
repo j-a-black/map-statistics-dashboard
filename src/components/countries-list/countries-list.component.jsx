@@ -9,10 +9,21 @@ import "./countries-list.styles.scss";
 const CountriesList = ({
   globalCases,
   globalDeaths,
+  globalDataLastUpdated,
   countriesData,
   handleCountryItemClicked,
   countryItemSelected,
 }) => {
+  const formattedGlobalDeaths = addCommaToValue(globalDeaths);
+  const formattedGlobalCases = addCommaToValue(globalCases);
+  let formattedGlobalDataLastUpdated;
+
+  if (globalDataLastUpdated) {
+    formattedGlobalDataLastUpdated = new Date(
+      globalDataLastUpdated
+    ).toLocaleString();
+  }
+
   const renderCountriesList = countriesData.map(
     ({ country, cases, deaths }) => {
       const countryCases = addCommaToValue(cases);
@@ -22,7 +33,9 @@ const CountriesList = ({
         <Table.Row key={country}>
           <Table.Cell
             className={
-              countryItemSelected === country ? "active-border-left" : ""
+              countryItemSelected === country
+                ? "active-border-left"
+                : "border-left"
             }
             // onClick={handleClickOnCountryItem}
             style={{ cursor: "pointer" }}
@@ -41,12 +54,11 @@ const CountriesList = ({
   return (
     <>
       <Header as="h2" size="huge" attached="top" inverted color="red" block>
-        <Header as="h3">{`Global Cases: ${addCommaToValue(
-          globalCases
-        )}`}</Header>
+        <Header as="h3">{`Global Cases: ${formattedGlobalCases}`}</Header>
+        <Header as="h3"> {`Global Deaths: ${formattedGlobalDeaths}`}</Header>
         <Header as="h3">
           {" "}
-          {`Global Deaths: ${addCommaToValue(globalDeaths)}`}
+          {`Current As Of: ${formattedGlobalDataLastUpdated}`}
         </Header>
       </Header>
       <Container
