@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { addCommaToValue } from "../../utils";
+import { addCommaToValue, formatDateAndTime } from "../../utils";
 
 import { Container, Header, Segment, Table } from "semantic-ui-react";
 
@@ -16,13 +16,10 @@ const CountriesList = ({
 }) => {
   const formattedGlobalDeaths = addCommaToValue(globalDeaths);
   const formattedGlobalCases = addCommaToValue(globalCases);
-  let formattedGlobalDataLastUpdated;
 
-  if (globalDataLastUpdated) {
-    formattedGlobalDataLastUpdated = new Date(
-      globalDataLastUpdated
-    ).toLocaleString();
-  }
+  const formattedGlobalDataLastUpdated = formatDateAndTime(
+    globalDataLastUpdated
+  );
 
   const renderCountriesList = countriesData.map(
     ({ country, cases, deaths }) => {

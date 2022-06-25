@@ -5,3 +5,10 @@ export const addCommaToValue = (value) => {
   }
   return;
 };
+
+export const formatDateAndTime = (value) => {
+  if (value) {
+    let formattedValue = new Date(value).toLocaleString();
+    return formattedValue;
+  }
+};
