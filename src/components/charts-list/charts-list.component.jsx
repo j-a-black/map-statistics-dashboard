@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Container, Header } from "semantic-ui-react";
 import { Bar, Line, Chart } from "react-chartjs-2";
 
+import { capitalizeFirstLetter } from "../../utils";
+
 // import {
 //   Chart as ChartJS,
 //   CategoryScale,
@@ -59,8 +61,6 @@ const ChartsList = ({
   countryItemSelected,
   countriesData,
 }) => {
-  // const { country } = countryHistoricalData;
-  // const { cases, deaths } = countryHistoricalData.timeline;
   let cases = {},
     deaths = {},
     country,
@@ -68,17 +68,13 @@ const ChartsList = ({
 
   if (countryHistoricalData.length !== 0 && countryItemSelected) {
     country = countryHistoricalData.country;
-    province = countryHistoricalData.province;
+    province = capitalizeFirstLetter(countryHistoricalData.province);
     cases = countryHistoricalData.timeline.cases;
     deaths = countryHistoricalData.timeline.deaths;
-
-    console.log(countryHistoricalData.timeline);
   } else {
     cases = globalHistoricalData.cases;
     deaths = globalHistoricalData.deaths;
   }
-
-  // console.log(globalHistoricalData);
 
   const labels = [];
 
@@ -118,8 +114,9 @@ const ChartsList = ({
   return (
     <Container>
       <Header as="h2" textAlign="center">
-        30-Day {country ? `${country}` : "Global"}{" "}
-        {province ? `${province}` : null} Snapshot
+        30-Day {country ? `${country}` : "Global"}
+        {""}
+        {province ? `, ${province}` : null} Snapshot
       </Header>
       <Container>
         <Line data={casesData} />

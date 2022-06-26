@@ -23,3 +23,8 @@ export const findCountryOrProvince = (values, itemSelectedFromList) => {
   // console.log(result);
   return result[0];
 };
+
+export const capitalizeFirstLetter = (string) => {
+  if (!string) return;
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
