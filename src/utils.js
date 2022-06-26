@@ -15,16 +15,28 @@ export const formatDateAndTime = (value) => {
 
 export const findCountryOrProvince = (values, itemSelectedFromList) => {
   // value.map((item) => console.log(item.province));
+  if (itemSelectedFromList === "Holy See (Vatican City State)") {
+    itemSelectedFromList = "Holy See";
+  }
   const result = values.filter(
     (value) =>
       value.country === itemSelectedFromList ||
       value.province === itemSelectedFromList.toLowerCase()
   );
-  // console.log(result);
+  // if (result[0].country === "Holy See (Vatican City State)") {
+  //   result[0].country = "Holy See";
+  // }
   return result[0];
 };
 
-export const capitalizeFirstLetter = (string) => {
+export const titleCaseFormat = (string) => {
   if (!string) return;
-  return string.charAt(0).toUpperCase() + string.slice(1);
+  let sentence = string.toLowerCase().split(" ");
+  for (let i = 0; i < sentence.length; i++) {
+    sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
+  }
+
+  return sentence.join(" ");
 };
+
+// Holy See (Vatican City State)

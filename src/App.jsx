@@ -82,7 +82,7 @@ const App = () => {
 
   // console.log(countriesData);
   // console.log(globalData);
-  // console.log(countryHistoricalData);
+  // console.log(countryItemSelected);
 
   return (
     <div>
