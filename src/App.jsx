@@ -8,12 +8,14 @@ import Map from "./components/map/map.component";
 import CountriesList from "./components/countries-list/countries-list.component";
 import ChartsList from "./components/charts-list/charts-list.component";
 
+import { findCountryOrProvince } from "./utils";
+
 const App = () => {
   const [countriesData, setCountriesData] = useState([]);
   const [globalData, setGlobalData] = useState([]);
   const [globalHistoricalData, setGlobalHistoricalData] = useState([]);
   const [countryItemSelected, setCountryItemSelected] = useState("");
-  const [countryHistoricalData, setCountryHistoricalData] = useState(null);
+  const [countryHistoricalData, setCountryHistoricalData] = useState([]);
 
   const countries = axios.get("https://disease.sh/v3/covid-19/countries");
   const worldwide = axios.get("https://disease.sh/v3/covid-19/all");
@@ -48,14 +50,28 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    // const getData = async () => {
+    //   if (!countryItemSelected) return;
+
+    //   try {
+    //     let result = await axios.get(
+    //       `${baseURLHistoricalData}/${countryItemSelected}`
+    //     );
+    //     setCountryHistoricalData(result.data);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
+
+    // getData();
+
     const getData = async () => {
       if (!countryItemSelected) return;
 
       try {
-        let result = await axios.get(
-          `${baseURLHistoricalData}/${countryItemSelected}`
-        );
-        setCountryHistoricalData(result.data);
+        let result = await axios.get(`${baseURLHistoricalData}`);
+        let data = findCountryOrProvince(result.data, countryItemSelected);
+        setCountryHistoricalData(data);
       } catch (err) {
         console.log(err);
       }

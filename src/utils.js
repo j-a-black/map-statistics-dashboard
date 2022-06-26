@@ -12,3 +12,14 @@ export const formatDateAndTime = (value) => {
     return formattedValue;
   }
 };
+
+export const findCountryOrProvince = (values, itemSelectedFromList) => {
+  // value.map((item) => console.log(item.province));
+  const result = values.filter(
+    (value) =>
+      value.country === itemSelectedFromList ||
+      value.province === itemSelectedFromList.toLowerCase()
+  );
+  // console.log(result);
+  return result[0];
+};

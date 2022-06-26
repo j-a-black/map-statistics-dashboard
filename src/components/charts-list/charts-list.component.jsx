@@ -61,19 +61,24 @@ const ChartsList = ({
 }) => {
   // const { country } = countryHistoricalData;
   // const { cases, deaths } = countryHistoricalData.timeline;
-  let cases, deaths, country;
+  let cases = {},
+    deaths = {},
+    country,
+    province;
 
-  if (countryHistoricalData && countryItemSelected) {
-    console.log(countryHistoricalData.timeline);
+  if (countryHistoricalData.length !== 0 && countryItemSelected) {
+    country = countryHistoricalData.country;
+    province = countryHistoricalData.province;
     cases = countryHistoricalData.timeline.cases;
     deaths = countryHistoricalData.timeline.deaths;
-    country = countryHistoricalData.country;
+
+    console.log(countryHistoricalData.timeline);
   } else {
     cases = globalHistoricalData.cases;
     deaths = globalHistoricalData.deaths;
   }
 
-  // const { cases, deaths } = globalHistoricalData;
+  // console.log(globalHistoricalData);
 
   const labels = [];
 
@@ -113,7 +118,8 @@ const ChartsList = ({
   return (
     <Container>
       <Header as="h2" textAlign="center">
-        30-Day {country ? `${country}` : "Global"} Snapshot
+        30-Day {country ? `${country}` : "Global"}{" "}
+        {province ? `${province}` : null} Snapshot
       </Header>
       <Container>
         <Line data={casesData} />
