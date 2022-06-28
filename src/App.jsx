@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import { Grid, Segment } from "semantic-ui-react";
+import { Grid, Segment, Divider, Loader, Dimmer } from "semantic-ui-react";
 
 import Jumbotron from "./components/jumbotron/jumbotron.component";
 import Map from "./components/map/map.component";
@@ -86,6 +86,12 @@ const App = () => {
 
   return (
     <div>
+      {globalData.loading && (
+        <Dimmer active>
+          <Loader content="loading" />
+        </Dimmer>
+      )}
+
       <Grid container style={{ padding: "2rem 0" }}>
         <Grid.Row>
           <Grid.Column>
@@ -100,6 +106,19 @@ const App = () => {
               countryItemSelected={countryItemSelected}
             />
           </Grid.Column>
+        </Grid.Row>
+
+        <Divider section horizontal>
+          Overview
+        </Divider>
+
+        <Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={4}>stuff</Grid.Column>
+            <Grid.Column width={4}>stuff</Grid.Column>
+            <Grid.Column width={4}>stuff</Grid.Column>
+            <Grid.Column width={4}>stuff</Grid.Column>
+          </Grid.Row>
         </Grid.Row>
 
         <Grid container columns={2} divided>

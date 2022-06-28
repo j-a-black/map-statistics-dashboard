@@ -23,9 +23,6 @@ export const findCountryOrProvince = (values, itemSelectedFromList) => {
       value.country === itemSelectedFromList ||
       value.province === itemSelectedFromList.toLowerCase()
   );
-  // if (result[0].country === "Holy See (Vatican City State)") {
-  //   result[0].country = "Holy See";
-  // }
   return result[0];
 };
 
