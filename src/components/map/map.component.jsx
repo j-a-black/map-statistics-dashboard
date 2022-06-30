@@ -52,6 +52,7 @@ const Map = ({ countriesData, countryItemSelected }) => {
             {country} <br />
             {`Cases: ${countryCases}`}
           </Popup>
+          this is a change
         </CircleMarker>
       );
     }
