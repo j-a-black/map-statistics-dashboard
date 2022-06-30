@@ -11,6 +11,7 @@ import {
   useMap,
   useMapEvent,
   useMapEvents,
+  CircleMarker,
 } from "react-leaflet";
 
 const Map = ({ countriesData, countryItemSelected }) => {
@@ -40,12 +41,18 @@ const Map = ({ countriesData, countryItemSelected }) => {
       const countryCases = addCommaToValue(cases);
 
       return (
-        <Marker key={country} position={[lat, long]}>
+        // <Marker key={country} position={[lat, long]}>
+        //   <Popup>
+        //     {country} <br />
+        //     {`Cases: ${countryCases}`}
+        //   </Popup>
+        // </Marker>
+        <CircleMarker key={country} center={[lat, long]} radius={2.5}>
           <Popup>
             {country} <br />
             {`Cases: ${countryCases}`}
           </Popup>
-        </Marker>
+        </CircleMarker>
       );
     }
   );
