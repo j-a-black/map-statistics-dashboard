@@ -41,7 +41,7 @@ const CountriesList = ({
             {country}
           </Table.Cell>
           <Table.Cell>
-            {countryCases} / {countryDeaths}
+            {countryCases} / {countryDeaths ? countryDeaths : 0}
           </Table.Cell>
         </Table.Row>
       );
@@ -50,14 +50,14 @@ const CountriesList = ({
 
   return (
     <>
-      <Header as="h2" size="huge" attached="top" inverted color="red" block>
+      {/* <Header as="h2" size="huge" attached="top" inverted color="red" block>
         <Header as="h3">{`Global Cases: ${formattedGlobalCases}`}</Header>
         <Header as="h3"> {`Global Deaths: ${formattedGlobalDeaths}`}</Header>
         <Header as="h3">
           {" "}
           {`Current As Of: ${formattedGlobalDataLastUpdated}`}
         </Header>
-      </Header>
+      </Header> */}
       <Container
         style={{ height: "49rem", overflowY: "scroll", paddingTop: "2rem" }}
       >

@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import { Grid, Segment, Divider, Loader, Dimmer } from "semantic-ui-react";
+import {
+  Grid,
+  Segment,
+  Divider,
+  Loader,
+  Dimmer,
+  Card,
+} from "semantic-ui-react";
 
 import Jumbotron from "./components/jumbotron/jumbotron.component";
 import Map from "./components/map/map.component";
 import CountriesList from "./components/countries-list/countries-list.component";
 import ChartsList from "./components/charts-list/charts-list.component";
 
-import { findCountryOrProvince } from "./utils";
+import {
+  findCountryOrProvince,
+  addCommaToValue,
+  formatDateAndTime,
+} from "./utils";
 
 const App = () => {
   const [countriesData, setCountriesData] = useState([]);
@@ -112,13 +123,31 @@ const App = () => {
           Overview
         </Divider>
 
-        <Grid.Row>
-          <Grid.Row>
-            <Grid.Column width={4}>stuff</Grid.Column>
-            <Grid.Column width={4}>stuff</Grid.Column>
-            <Grid.Column width={4}>stuff</Grid.Column>
-            <Grid.Column width={4}>stuff</Grid.Column>
-          </Grid.Row>
+        <Grid.Row centered={true}>
+          <Grid.Column width={4} textAlign="center">
+            <Card>
+              <Card.Header>Global Cases</Card.Header>
+              <Card.Description>
+                {addCommaToValue(globalData.cases)}
+              </Card.Description>
+            </Card>
+          </Grid.Column>
+          <Grid.Column width={4} textAlign="center">
+            <Card>
+              <Card.Header>Global Deaths</Card.Header>
+              <Card.Description>
+                {addCommaToValue(globalData.deaths)}
+              </Card.Description>
+            </Card>
+          </Grid.Column>
+          <Grid.Column width={4} textAlign="center">
+            <Card>
+              <Card.Header>Current As Of</Card.Header>
+              <Card.Description>
+                {formatDateAndTime(globalData.updated)}
+              </Card.Description>
+            </Card>
+          </Grid.Column>
         </Grid.Row>
 
         <Grid container columns={2} divided>
