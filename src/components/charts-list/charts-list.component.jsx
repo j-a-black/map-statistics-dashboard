@@ -2,7 +2,7 @@ import React from "react";
 
 import Charts from "../charts/charts.component";
 
-import { Container } from "semantic-ui-react";
+import { Container, Header } from "semantic-ui-react";
 
 const ChartsList = ({
   globalHistoricalData,
@@ -11,7 +11,7 @@ const ChartsList = ({
   countriesData,
 }) => {
   const RenderMsg = () => {
-    return <p>Information not available</p>;
+    return <Header as="h2">Information Not Available</Header>;
   };
 
   return (

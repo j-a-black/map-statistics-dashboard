@@ -116,7 +116,12 @@ const Charts = ({
   return (
     <>
       <Header as="h2" textAlign="center">
-        30-Day {country ? `${country}` : province ? `${province}` : "Global"}{" "}
+        30-Day{" "}
+        {country
+          ? `${country}`
+          : province
+          ? `Province (${province})`
+          : "Global"}{" "}
         Snapshot
       </Header>
       <Container>

@@ -47,7 +47,14 @@ const Map = ({ countriesData, countryItemSelected }) => {
         //     {`Cases: ${countryCases}`}
         //   </Popup>
         // </Marker>
-        <CircleMarker key={country} center={[lat, long]} radius={2.5}>
+        <CircleMarker
+          key={country}
+          center={[lat, long]}
+          radius={4}
+          color="red"
+          fillColor="red"
+          fillOpacity={1}
+        >
           <Popup>
             {country} <br />
             {`Cases: ${countryCases}`}

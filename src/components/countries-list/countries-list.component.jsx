@@ -14,13 +14,6 @@ const CountriesList = ({
   handleCountryItemClicked,
   countryItemSelected,
 }) => {
-  const formattedGlobalDeaths = addCommaToValue(globalDeaths);
-  const formattedGlobalCases = addCommaToValue(globalCases);
-
-  const formattedGlobalDataLastUpdated = formatDateAndTime(
-    globalDataLastUpdated
-  );
-
   const renderCountriesList = countriesData.map(
     ({ country, cases, deaths }) => {
       const countryCases = addCommaToValue(cases);
@@ -68,6 +61,7 @@ const CountriesList = ({
               <Table.HeaderCell>Cases / Deaths</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
+
           <Table.Body>{renderCountriesList}</Table.Body>
         </Table>
       </Container>
