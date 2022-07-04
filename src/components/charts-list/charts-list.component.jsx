@@ -42,6 +42,7 @@ import {
   Tooltip,
   Title,
 } from "chart.js";
+import { render } from "@testing-library/react";
 
 ChartJS.register(
   BarController,
@@ -66,12 +67,18 @@ const ChartsList = ({
     country = "",
     province = "";
 
+  // if (countryHistoricalData === undefined) return;
+  let casesData, deathsData;
+  if (countryHistoricalData === undefined) {
+    casesData = null;
+    deathsData = null;
+    return;
+  }
+
   if (countryHistoricalData.length !== 0 && countryItemSelected) {
     countryHistoricalData.province !== null
       ? (province = titleCaseFormat(countryHistoricalData.province))
       : (country = countryHistoricalData.country);
-    // country = countryHistoricalData.country;
-    // province = titleCaseFormat(countryHistoricalData.province);
     cases = countryHistoricalData.timeline.cases;
     deaths = countryHistoricalData.timeline.deaths;
   } else {
@@ -81,7 +88,7 @@ const ChartsList = ({
 
   const labels = [];
 
-  const casesData = {
+  casesData = {
     labels: labels,
     datasets: [
       {
@@ -97,7 +104,8 @@ const ChartsList = ({
       },
     ],
   };
-  const deathsData = {
+
+  deathsData = {
     labels: labels,
     datasets: [
       {
@@ -114,22 +122,29 @@ const ChartsList = ({
     ],
   };
 
+  const Charts = () => {
+    return (
+      <>
+        <Header as="h2" textAlign="center">
+          30-Day {country ? `${country}` : province ? `${province}` : "Global"}{" "}
+          Snapshot
+        </Header>
+        <Container>
+          <Line data={casesData} />
+        </Container>
+        <Container>
+          <Line data={deathsData} />
+        </Container>
+      </>
+    );
+  };
+
+  const RenderMsg = () => {
+    return <p>Information not available</p>;
+  };
+
   return (
-    <Container>
-      <Header as="h2" textAlign="center">
-        {/* 30-Day {country ? `${country}` : "Global"}
-        {""}
-        {province ? ` ${province}` : null} Snapshot */}
-        30-Day {country ? `${country}` : province ? `${province}` : "Global"}{" "}
-        Snapshot
-      </Header>
-      <Container>
-        <Line data={casesData} />
-      </Container>
-      <Container>
-        <Line data={deathsData} />
-      </Container>
-    </Container>
+    <Container>{casesData !== null ? <Charts /> : <RenderMsg />}</Container>
   );
 };
 
