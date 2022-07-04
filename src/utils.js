@@ -14,7 +14,6 @@ export const formatDateAndTime = (value) => {
 };
 
 export const findCountryOrProvince = (values, itemSelectedFromList) => {
-  // value.map((item) => console.log(item.province));
   if (itemSelectedFromList === "Holy See (Vatican City State)") {
     itemSelectedFromList = "Holy See";
   }
@@ -35,5 +34,3 @@ export const titleCaseFormat = (string) => {
 
   return sentence.join(" ");
 };
-
-// Holy See (Vatican City State)

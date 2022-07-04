@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Container, Header } from "semantic-ui-react";
-import { Bar, Line, Chart } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
 import { titleCaseFormat } from "../../utils";
 
@@ -120,7 +120,7 @@ const Charts = ({
         {country
           ? `${country}`
           : province
-          ? `Province (${province})`
+          ? `${province} (Province)`
           : "Global"}{" "}
         Snapshot
       </Header>

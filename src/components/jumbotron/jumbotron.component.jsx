@@ -1,15 +1,8 @@
 import React from "react";
 
-import { Button, Message, Header, Container, Segment } from "semantic-ui-react";
+import { Button, Message } from "semantic-ui-react";
 
 const Jumbotron = () => {
-  //   const ExampleButton = React.forwardRef((props, ref) => (
-  //     <div>
-  //       <Button {...props} ref={ref} />
-  //     </div>
-  //   ));
-  //   const forwardedRef = React.useRef(null);
-
   return (
     <Message color="blue">
       <Message.Content>

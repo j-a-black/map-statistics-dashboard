@@ -19,7 +19,6 @@ const CountriesList = ({
       return (
         <Table.Row key={country}>
           <Table.Cell
-            // positive={countryItemSelected === country ? true : false}
             singleLine
             className={
               countryItemSelected === country

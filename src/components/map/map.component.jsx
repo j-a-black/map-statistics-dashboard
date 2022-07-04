@@ -6,17 +6,11 @@ import {
   MapContainer,
   TileLayer,
   Popup,
-  Marker,
-  Circle,
-  useMap,
   useMapEvent,
-  useMapEvents,
   CircleMarker,
 } from "react-leaflet";
 
 const Map = ({ countriesData, countryItemSelected }) => {
-  // const position = [51.505, -0.09];
-
   const [position, setPosition] = useState([0, 0]);
   const animateRef = useRef(true);
 
@@ -50,7 +44,7 @@ const Map = ({ countriesData, countryItemSelected }) => {
         <CircleMarker
           key={country}
           center={[lat, long]}
-          radius={4}
+          radius={6}
           color="red"
           fillColor="red"
           fillOpacity={1}
@@ -75,8 +69,6 @@ const Map = ({ countriesData, countryItemSelected }) => {
       }
     }
   }, [countryItemSelected]);
-
-  // console.log(position);
 
   return (
     <MapContainer

@@ -7,9 +7,7 @@ import {
   Divider,
   Loader,
   Dimmer,
-  Card,
   Header,
-  Statistic,
 } from "semantic-ui-react";
 
 import Jumbotron from "./components/jumbotron/jumbotron.component";
@@ -22,6 +20,9 @@ import {
   addCommaToValue,
   formatDateAndTime,
 } from "./utils";
+
+import StatisticBox from "./components/statistic-box/statistic-box.component";
+import CardBox from "./components/card-box/card-box.component";
 
 const App = () => {
   const [countriesData, setCountriesData] = useState([]);
@@ -72,21 +73,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    // const getData = async () => {
-    //   if (!countryItemSelected) return;
-
-    //   try {
-    //     let result = await axios.get(
-    //       `${baseURLHistoricalData}/${countryItemSelected}`
-    //     );
-    //     setCountryHistoricalData(result.data);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
-
-    // getData();
-
     const getData = async () => {
       if (!countryItemSelected) return;
 
@@ -101,10 +87,6 @@ const App = () => {
 
     getData();
   }, [countryItemSelected]);
-
-  // console.log(countriesData);
-  // console.log(globalData);
-  // console.log(countryItemSelected);
 
   return (
     <div>
@@ -142,30 +124,22 @@ const App = () => {
             <Grid container columns={3} stackable centered>
               <Grid.Row centered={true}>
                 <Grid.Column width={5} textAlign="center">
-                  <Statistic>
-                    <Statistic.Label>Global Cases</Statistic.Label>
-                    <Statistic.Value>
-                      {addCommaToValue(globalData.cases)}
-                    </Statistic.Value>
-                  </Statistic>
+                  <StatisticBox
+                    label="Global Cases"
+                    value={addCommaToValue(globalData.cases)}
+                  />
                 </Grid.Column>
                 <Grid.Column width={5} textAlign="center">
-                  <Statistic>
-                    <Statistic.Label>Global Deaths</Statistic.Label>
-                    <Statistic.Value>
-                      {addCommaToValue(globalData.deaths)}
-                    </Statistic.Value>
-                  </Statistic>
+                  <StatisticBox
+                    label="Global Deaths"
+                    value={addCommaToValue(globalData.deaths)}
+                  />
                 </Grid.Column>
                 <Grid.Column width={5} textAlign="center">
-                  <Card centered>
-                    <Card.Content>
-                      <Card.Header>Current As Of</Card.Header>
-                      <Card.Description>
-                        {formatDateAndTime(globalData.updated)}
-                      </Card.Description>
-                    </Card.Content>
-                  </Card>
+                  <CardBox
+                    header="Current As Of"
+                    description={formatDateAndTime(globalData.updated)}
+                  />
                 </Grid.Column>
               </Grid.Row>
             </Grid>
