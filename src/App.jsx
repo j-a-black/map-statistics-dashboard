@@ -31,7 +31,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const countries = axios.get("https://disease.sh/v3/covid-19/countriesxxxxx");
+  const countries = axios.get("https://disease.sh/v3/covid-19/countries");
   const worldwide = axios.get("https://disease.sh/v3/covid-19/all");
   const globalHistory = axios.get(
     "https://disease.sh/v3/covid-19/historical/all"
