@@ -63,8 +63,10 @@ const CountriesList = ({
       >
         <Table attached>
           <Table.Header>
-            <Table.HeaderCell>Country</Table.HeaderCell>
-            <Table.HeaderCell>Cases / Deaths</Table.HeaderCell>
+            <Table.Row>
+              <Table.HeaderCell>Country</Table.HeaderCell>
+              <Table.HeaderCell>Cases / Deaths</Table.HeaderCell>
+            </Table.Row>
           </Table.Header>
           <Table.Body>{renderCountriesList}</Table.Body>
         </Table>
