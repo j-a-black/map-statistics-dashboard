@@ -15,7 +15,7 @@ const ChartsList = ({
   };
 
   return (
-    <Container>
+    <Container style={{ height: "60rem" }}>
       {countryHistoricalData !== undefined ? (
         <Charts
           globalHistoricalData={globalHistoricalData}

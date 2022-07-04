@@ -59,7 +59,7 @@ const CountriesList = ({
         </Header>
       </Header> */}
       <Container
-        style={{ height: "49rem", overflowY: "scroll", paddingTop: "2rem" }}
+        style={{ height: "60rem", overflowY: "scroll", paddingTop: "2rem" }}
       >
         <Table attached>
           <Table.Header>
