@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { addCommaToValue, formatDateAndTime } from "../../utils";
+import { addCommaToValue } from "../../utils";
 
-import { Container, Header, Segment, Table } from "semantic-ui-react";
+import { Container, Table } from "semantic-ui-react";
 
 import "./countries-list.styles.scss";
 
 const CountriesList = ({
-  globalCases,
-  globalDeaths,
-  globalDataLastUpdated,
   countriesData,
   handleCountryItemClicked,
   countryItemSelected,
@@ -22,18 +19,19 @@ const CountriesList = ({
       return (
         <Table.Row key={country}>
           <Table.Cell
+            // positive={countryItemSelected === country ? true : false}
+            singleLine
             className={
               countryItemSelected === country
-                ? "active-border-left"
+                ? "active-border-left active-name-highlighted "
                 : "border-left"
             }
-            // onClick={handleClickOnCountryItem}
             style={{ cursor: "pointer" }}
             onClick={handleCountryItemClicked}
           >
             {country}
           </Table.Cell>
-          <Table.Cell>
+          <Table.Cell singleLine>
             {countryCases} / {countryDeaths ? countryDeaths : 0}
           </Table.Cell>
         </Table.Row>
@@ -43,18 +41,8 @@ const CountriesList = ({
 
   return (
     <>
-      {/* <Header as="h2" size="huge" attached="top" inverted color="red" block>
-        <Header as="h3">{`Global Cases: ${formattedGlobalCases}`}</Header>
-        <Header as="h3"> {`Global Deaths: ${formattedGlobalDeaths}`}</Header>
-        <Header as="h3">
-          {" "}
-          {`Current As Of: ${formattedGlobalDataLastUpdated}`}
-        </Header>
-      </Header> */}
-      <Container
-        style={{ height: "60rem", overflowY: "scroll", paddingTop: "2rem" }}
-      >
-        <Table attached>
+      <Container style={{ height: "60rem", overflowY: "scroll" }}>
+        <Table attached columns={2} unstackable>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Country</Table.HeaderCell>

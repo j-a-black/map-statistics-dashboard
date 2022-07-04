@@ -9,6 +9,7 @@ import {
   Dimmer,
   Card,
   Header,
+  Statistic,
 } from "semantic-ui-react";
 
 import Jumbotron from "./components/jumbotron/jumbotron.component";
@@ -107,7 +108,7 @@ const App = () => {
 
   return (
     <div>
-      <Grid container style={{ padding: "2rem 0" }}>
+      <Grid container style={{ padding: "2rem 0" }} centered>
         <Grid.Row>
           <Grid.Column>
             <Jumbotron />
@@ -138,34 +139,38 @@ const App = () => {
               Overview
             </Divider>
 
-            <Grid.Row centered={true}>
-              <Grid.Column width={4} textAlign="center">
-                <Card>
-                  <Card.Header>Global Cases</Card.Header>
-                  <Card.Description>
-                    {addCommaToValue(globalData.cases)}
-                  </Card.Description>
-                </Card>
-              </Grid.Column>
-              <Grid.Column width={4} textAlign="center">
-                <Card>
-                  <Card.Header>Global Deaths</Card.Header>
-                  <Card.Description>
-                    {addCommaToValue(globalData.deaths)}
-                  </Card.Description>
-                </Card>
-              </Grid.Column>
-              <Grid.Column width={4} textAlign="center">
-                <Card>
-                  <Card.Header>Current As Of</Card.Header>
-                  <Card.Description>
-                    {formatDateAndTime(globalData.updated)}
-                  </Card.Description>
-                </Card>
-              </Grid.Column>
-            </Grid.Row>
+            <Grid container columns={3} stackable centered>
+              <Grid.Row centered={true}>
+                <Grid.Column width={5} textAlign="center">
+                  <Statistic>
+                    <Statistic.Label>Global Cases</Statistic.Label>
+                    <Statistic.Value>
+                      {addCommaToValue(globalData.cases)}
+                    </Statistic.Value>
+                  </Statistic>
+                </Grid.Column>
+                <Grid.Column width={5} textAlign="center">
+                  <Statistic>
+                    <Statistic.Label>Global Deaths</Statistic.Label>
+                    <Statistic.Value>
+                      {addCommaToValue(globalData.deaths)}
+                    </Statistic.Value>
+                  </Statistic>
+                </Grid.Column>
+                <Grid.Column width={5} textAlign="center">
+                  <Card centered>
+                    <Card.Content>
+                      <Card.Header>Current As Of</Card.Header>
+                      <Card.Description>
+                        {formatDateAndTime(globalData.updated)}
+                      </Card.Description>
+                    </Card.Content>
+                  </Card>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
 
-            <Grid container columns={2} divided>
+            <Grid container columns={2} stackable divided>
               <Grid.Row>
                 <Grid.Column>
                   <Segment>
